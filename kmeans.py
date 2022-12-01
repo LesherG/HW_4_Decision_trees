@@ -79,8 +79,9 @@ def imageProblem():
 
 
   # Perform k-means clustering
-  k=10
+  k=4
   centroids, assignments, SSE = kMeansClustering(img_feats, k, 30, min_size=0)
+  
 
   # Visualize Clusters
   for c in range(len(centroids)):
@@ -102,6 +103,7 @@ def imageProblem():
       axs[i].axes.xaxis.set_visible(False)
       axs[i].axes.yaxis.set_visible(False)
     plt.show()
+  print(SSE)
 
 
 
@@ -174,7 +176,7 @@ def updateCentroids(dataset, centroids, assignments):
   counts = np.zeros((len(centroids),))
 
   for centroid in range(len(centroids)):
-    total = np.zeros((2,))
+    total = np.zeros((len(dataset[0]),))
     for x in range(len(dataset)):
       if(assignments[x] == centroid):
         counts[centroid] += 1
@@ -254,5 +256,5 @@ def plotClustering(centroids, assignments, dataset, title=None):
 
 
 if __name__=="__main__":
-  toyProblem()
+  # toyProblem()
   imageProblem()
