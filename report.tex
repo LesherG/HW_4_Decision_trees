@@ -137,14 +137,62 @@
         \end{figure}   
         \qquad First, this computation takes significantly longer as you increase k. 
         Second, it's hard to find what your data actually looks like with just the SSE. We know our data is 3 separate gaussian distributions, but if we choose k by the SSE we should pick higher.
-        While the error might be lower, it just means that there are more arbitrary groups on our data and that the _overall_ distance from a point to its centroid is small. Not that the centroids accurately represent the data.
+        While the error might be lower, it just means that there are more arbitrary groups on our data and that the \emph{overall} distance from a point to its centroid is small. Not that the centroids accurately represent the data.
     
 
     \section*{Q7: Clustering Images}
         \subsection*{a)}
-
-
+        \qquad It seems to be too high. There are primarily three types of images: city, road and nature, with a few outliers.
+        \subsection*{b)}
+        \qquad I found that $k=4$ was a good k to sort with.
+        (Clusters on following pages)
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=\textwidth]{"k_4_0.png"}
+            \caption{Cluster 0}
+        \end{figure}  
+        \begin{figure}[!h]
+            \centering
+            \includegraphics[width=\textwidth]{"k_4_1.png"}
+            \caption{Cluster 1}
+        \end{figure}  
+        \begin{figure}[!h]
+            \centering
+            \includegraphics[width=\textwidth]{"k_4_2.png"}
+            \caption{Cluster 2}
+        \end{figure}  
+        \begin{figure}[!h]
+            \centering
+            \includegraphics[width=\textwidth]{"k_4_3.png"}
+            \caption{Cluster 3}
+        \end{figure}  
+        \clearpage
+        \subsection*{c)}
+        \begin{align*}
+            \text{SSE of } &k=10 \approx 1200\\
+            \text{SSE of } &k=4 \approx 1270
+        \end{align*}
+        Given that k=4 is a much more sorted group set: No, SSE is not a good indicator.
+        
+    
     \section*{Q8 Evaluating Clustering as Classification}
+    \begin{center}
+        \begin{tabular}{c | c c}
+            $C_0$ & Nature & 4/50 wrong\\
+            $C_1$ & City 1 & 1/50 wrong\\
+            $C_1$ & City 2 & 2/50 wrong\\
+            $C_1$ & Road & 4/50 wrong
+        \end{tabular}
+    \end{center}
+    \qquad This makes the purity equal to:
+    \begin{equation*}
+        1-\frac{4+1+2+4}{50*4} = .945
+    \end{equation*}
     \section*{Debrief:}
+    \noindent1. Approximately 2.5 hrs. on work, 1 hr on report.\\
+    2. Easy - I understood k-means well enough from the lectures\\
+    3. Alone\\
+    4. 95\%\\
+    5. I really liked this class, and thank you for having me! :)
 
 \end{document}
