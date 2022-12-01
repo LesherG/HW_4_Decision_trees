@@ -1,0 +1,99 @@
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[margin=1in]{geometry}
+\usepackage{indentfirst}
+
+\title{HW 4}
+\author{Gavin Lesher}
+\date{\today}
+\begin{document}
+    \maketitle
+    \cleardoublepage
+    \section*{Q1: Drawing Decision Tree Predictions}
+        \subsection*{a)}
+            \begin{tabular}{c c c}
+                A:[0,10) & C: \O & E: \O \\
+                B:[10,15) & D: [15, 25) & F: [25,30]
+            \end{tabular}
+        \subsection*{b)}
+        \begin{figure}[h]
+            \includegraphics[width=.5\textwidth]{"Q1_b.png"}
+        \end{figure}
+        \subsection*{c)}
+            It mekes it easier to find an accurate tree because you have more ending trees to select from. However, it does not make it easier to find an \emph{optimal} tree.
+
+
+    \section*{Q2: Manualy Learning A Decision Tree}
+        We must first compute the entropy of the original table.
+        \begin{equation*}
+            H(y) = -\frac{1}{2} log_2 \frac{1}{2} - \frac{1}{2} log_2 \frac{1}{2} = 1
+        \end{equation*}
+        \begin{center}
+            \begin{tabular}{c | l}
+                Split On & \\
+                \hline
+                A & $H(y) - H(y|A) \Rightarrow-\frac{1}{2}\left(\frac{2}{3}log_2 \frac{2}{3} + \frac{1}{3}log_2 \frac{1}{3}\right) -\frac{1}{2}\left(\frac{1}{3}log_2 \frac{1}{3} + \frac{2}{3}log_2 \frac{2}{3}\right)$\\
+                B & $H(y) - H(y|B) \Rightarrow -\frac{1}{3}\left(\frac{1}{2}log_2 \frac{1}{2} + \frac{1}{2}log_2 \frac{1}{2}\right) -\frac{2}{3}\left(\frac{1}{2}log_2 \frac{1}{2} + \frac{1}{2}log_2 \frac{1}{2}\right)$\\
+                C & $H(y) - H(y|C) \Rightarrow -\frac{1}{2}\left(\frac{2}{3}log_2 \frac{2}{3} + \frac{1}{3}log_2 \frac{1}{3}\right) -\frac{1}{2}\left(\frac{1}{3}log_2 \frac{1}{3} + \frac{2}{3}log_2 \frac{2}{3}\right)$\\
+                &\\
+                A & = 1 - .9183 = .0817 \\
+                B & = 1 - 1 = 0\\
+                C & = 1 - .9183 = .0817
+            \end{tabular}   
+        \end{center}
+        \qquad We can split on either A or C, so we arbitrarily choose A.
+        I will first work on the dataset where $A=0$ with data:
+        \begin{center}
+            \begin{tabular}{c | c c | c}
+                A & B & C & Y \\
+                \hline
+                0 & 1 & 1 & 0 \\
+                0 & 0 & 0 & 0 \\
+                0 & 1 & 0 & 1 \\
+            \end{tabular}
+        \end{center}
+        \qquad For simplicity I will be leaving out the intermediary calculations of $H(y | X)$
+        \begin{center}
+            \begin{tabular}{c | l}
+                Split On & \\
+                \hline
+                B & $.9183 - H(y | B) = .9183 - \frac{2}{3} = .2516$\\
+                C & $.9183 - H(y | C) = .9183 - \frac{2}{3} = .2516$\\
+            \end{tabular}
+        \end{center}
+        \qquad Again, we arbitrarily choose B to split on. The dataset $A=0, B=0 $ only has one entry, so we can make a leaf node that predicts 0 for $B = 0$. 
+        We then move onto our final split, but since we only have C to split on, we automatically do that, and create 2 more leaf nodes off of that split where $C = 0$ predicts 1, and $C=1$ predicts 0.
+        Our tree now looks as follows: 
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=.5\textwidth]{"Q2_1.png"}
+        \end{figure}
+
+        \qquad We now move onto the empty sub-tree of $A=1$. 
+        Following the same process:
+        \begin{center}
+            \begin{tabular}{c | l}
+                Split On & \\
+                \hline
+                B & $.9183 - H(y | B) = .9183 - \frac{2}{3} = .2516$\\
+                C & $.9183 - H(y | C) = .9183 - \frac{2}{3} = .2516$\\
+            \end{tabular}
+        \end{center}
+        \qquad Split on B, create leaf node with $B=0$ predicting 1, then split on C to have the final predictions of $C=1$ predicts 0 and $C=0$ predicts 1. 
+        This makes our final tree have the following structure, and a training accuracy of 100\%. 
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=.5\textwidth]{"Q2_2.png"}
+        \end{figure}
+        \clearpage
+
+
+    \section*{Q3: Measuring Correlation in Random Forests}
+    \section*{Q5: Randomness in Clustering}
+    \section*{Q6: Error Vs. K}
+    \section*{Q7: Clustering Images}
+    \section*{Q8 Evaluating Clustering as Classification}
+    \section*{Debrief:}
+
+\end{document}
