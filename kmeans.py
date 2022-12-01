@@ -112,7 +112,8 @@ def imageProblem():
 ##########################################################
 
 def initalizeCentroids(dataset, k):
-  raise Exception('Student error: You haven\'t implemented initializeCentroids yet.')
+  ind = np.random.randint(len(dataset), size=k)
+  centroids = np.array([dataset[x] for x in ind])
   return centroids
 
 ##########################################################
@@ -131,7 +132,16 @@ def initalizeCentroids(dataset, k):
 ##########################################################
 
 def computeAssignments(dataset, centroids):
-  raise Exception('Student error: You haven\'t implemented computeAssignments yet.')
+  assignments = np.array([])
+  for point in dataset:
+    dist = np.inf
+    centroid = -1
+    for i in range(len(centroids)):
+      cDist = np.linalg.norm(point - centroids[i])
+      if cDist < dist:
+        centroid = i
+        dist = cDist
+    assignments = np.append(assignments, np.array([centroid]))
   return assignments
 
 ##########################################################
@@ -154,7 +164,17 @@ def computeAssignments(dataset, centroids):
 ##########################################################
 
 def updateCentroids(dataset, centroids, assignments):
-  raise Exception('Student error: You haven\'t implemented updateCentroids yet.')
+  counts = np.zeros((3,))
+
+  for centroid in range(len(centroids)):
+    total = np.zeros((2,))
+    for x in range(len(dataset)):
+      if(assignments[x] == centroid):
+        counts[centroid] += 1
+        total += dataset[x]
+    new = total / counts[centroid]
+    centroids[centroid] = new
+
   return centroids, counts
   
 
@@ -174,7 +194,9 @@ def updateCentroids(dataset, centroids, assignments):
 ##########################################################
 
 def calculateSSE(dataset, centroids, assignments):
-  raise Exception('Student error: You haven\'t implemented calculateSSE yet.')
+  sse = 0
+  for x in range(len(dataset)): # for every point
+    sse += np.linalg.norm(dataset[x] - centroids[int(assignments[x])])
   return sse
   
 
