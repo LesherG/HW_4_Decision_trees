@@ -16,7 +16,7 @@ def toyProblem():
   # Apply kMeans with visualization on
   k = 3
   max_iters=20
-  centroids, assignments, SSE = kMeansClustering(X, k=k, max_iters=max_iters, visualize=True)
+  centroids, assignments, SSE = kMeansClustering(X, k=k, max_iters=max_iters, visualize=False)
   plotClustering(centroids, assignments, X, title="Final Clustering")
   
   # Print a plot of the SSE over training
@@ -37,7 +37,11 @@ def toyProblem():
   SSE_rand = []
   # Run the clustering with k=5 and max_iters=20 fifty times and 
   # store the final sum-of-squared-error for each run in the list SSE_rand.
-  raise Exception('Student error: You haven\'t implemented the randomness experiment for Q5.')
+  for x in range(50):
+    print("Running k-means 50 times: iteration " + str(x))
+    centroids, assignments, SSE = kMeansClustering(X, k=k, max_iters=max_iters, visualize=False)
+    SSE_rand.append(SSE)
+
   
 
   # Plot error distribution
@@ -54,7 +58,10 @@ def toyProblem():
   SSE_vs_k = []
   # Run the clustering max_iters=20 for k in the range 1 to 150 and 
   # store the final sum-of-squared-error for each run in the list SSE_vs_k.
-  raise Exception('Student error: You haven\'t implemented the randomness experiment for Q5.')
+  for k in range(1,151):
+    print("Running k-means on k = " + str(k))
+    centroids, assignments, SSE = kMeansClustering(X, k=k, max_iters=max_iters, visualize=False)
+    SSE_vs_k.append(SSE)
 
   # Plot how SSE changes as k increases
   plt.figure(figsize=(16,8))
@@ -164,7 +171,7 @@ def computeAssignments(dataset, centroids):
 ##########################################################
 
 def updateCentroids(dataset, centroids, assignments):
-  counts = np.zeros((3,))
+  counts = np.zeros((len(centroids),))
 
   for centroid in range(len(centroids)):
     total = np.zeros((2,))
