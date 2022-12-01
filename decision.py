@@ -44,7 +44,7 @@ for m in range(M):
   y_data = y_train
 
   #Fit the model and store it's predictions
-  clf = tree.DecisionTreeClassifier(criterion="entropy", max_features=len(X_data[0])) # 30 features total
+  clf = tree.DecisionTreeClassifier(criterion="entropy", max_features=29) # 30 features total
   clf = clf.fit(X_data, y_data)
   preds[:,m]= clf.predict(X_test)
 
@@ -72,5 +72,5 @@ plt.yticks(np.arange(0,M))
 plt.xticks(np.arange(0,M))
 plt.xlabel("Model ID")
 plt.ylabel("Model ID")
-plt.title("Prediction Correlation Between Models (With Bagging)")
+plt.title("Prediction Correlation Between Models")
 plt.show()

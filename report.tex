@@ -90,9 +90,60 @@
 
 
     \section*{Q3: Measuring Correlation in Random Forests}
+        \subsection*{a)}
+            \begin{figure}[h]
+                \centering
+                \includegraphics[width=\textwidth]{"with_bagging.png"}
+            \end{figure}
+        \qquad With bagging, the correlation between models goes down a good amount. For simply sampling data we compromise not a lot (given we have multiple models), and gain quite a bit. I am suprised by how effective this was.
+
+        \subsection*{b)}
+            \begin{figure}[!h]
+                \centering
+                \includegraphics[width=\textwidth]{"max_features_5.png"}
+                \caption{5 Max Features}
+            \end{figure}
+            \begin{figure}[!h]
+                \centering
+                \includegraphics[width=\textwidth]{"max_features_20.png"}
+                \caption{20 Max Features}
+            \end{figure}
+            \begin{figure}[!h]
+                \centering
+                \includegraphics[width=\textwidth]{"max_features_29.png"}
+                \caption{29 Max Features}
+            \end{figure}
+
+        \qquad With values under the total features, it seems there is commonly a reduction in correlation. Even with max\_features equal to 29 (one less than all features), there are less-correlated models. 
+        Also, as expected, when max\_features returns to the number of features the chart becomes identical with the original chart. (charts on next 2 pages)
+        \clearpage
+        
+
     \section*{Q5: Randomness in Clustering}
+        \begin{figure}[h]
+            \centering
+            \includegraphics[width=\textwidth]{"Q5_randomness.png"}
+            \caption{SSE of 50 k-means trials (k=5)}
+        \end{figure}        
+        \qquad This chart is a good example why you should run k-means multiple times. Sometimes, the algorithm doesn't accurately capture the data due to the randomness of initiallization.
+        The algorithm finished, and did not make an error, but it still does not represent our data, given the nature of the algorithm.
+
+        \clearpage
     \section*{Q6: Error Vs. K}
+        \begin{figure}[!h]
+            \centering
+            \includegraphics[width=\textwidth]{"Q6_Error_vs_k.png"}
+            \caption{SSE of k-means where $k = (1 ... 150)$}
+        \end{figure}   
+        \qquad First, this computation takes significantly longer as you increase k. 
+        Second, it's hard to find what your data actually looks like with just the SSE. We know our data is 3 separate gaussian distributions, but if we choose k by the SSE we should pick higher.
+        While the error might be lower, it just means that there are more arbitrary groups on our data and that the _overall_ distance from a point to its centroid is small. Not that the centroids accurately represent the data.
+    
+
     \section*{Q7: Clustering Images}
+        \subsection*{a)}
+
+
     \section*{Q8 Evaluating Clustering as Classification}
     \section*{Debrief:}
 
